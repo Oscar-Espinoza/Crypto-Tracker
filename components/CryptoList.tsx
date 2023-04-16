@@ -1,8 +1,9 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import CryptoItem from './CryptoItem';
+import {useDispatch, useSelector} from 'react-redux';
+import {removeCrypto} from '../redux/actions/cryptoActions';
 
-// Props type definition
 type CryptoListProps = {
   data: Array<{
     id: string;
@@ -14,10 +15,12 @@ type CryptoListProps = {
   onRemove: (id: string) => void;
 };
 
-const CryptoList: React.FC<CryptoListProps> = ({data, onRemove}) => {
+const CryptoList: React.FC = () => {
+  const cryptos = useSelector((state: CryptoListProps) => state.crypto.cryptos);
+
   return (
     <FlatList
-      data={data}
+      data={cryptos}
       renderItem={({item}) => (
         <CryptoItem
           id={item.id}
@@ -25,7 +28,6 @@ const CryptoList: React.FC<CryptoListProps> = ({data, onRemove}) => {
           symbol={item.symbol}
           price={item.price}
           percentageChange={item.percentageChange}
-          onRemove={onRemove}
         />
       )}
       keyExtractor={item => item.id}
