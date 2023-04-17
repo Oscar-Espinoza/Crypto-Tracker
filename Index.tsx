@@ -9,9 +9,6 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from './redux/store';
 import {addCrypto} from './redux/actions/cryptoActions';
-import {SafeAreaView, useColorScheme} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -27,37 +24,35 @@ function App(): JSX.Element {
   const userCryptoList = useSelector(
     (state: any) => state.crypto.userCryptoList,
   );
-  const loading = useSelector((state: any) => state.crypto.loading);
+  const cryptoData = useSelector((state: any) => state.crypto.cryptoData);
 
   useEffect(() => {
-    if (!loading) {
-      userCryptoList.forEach((symbol: string) => dispatch(addCrypto(symbol)));
+    const fetchData = async () => {
+      await userCryptoList.forEach((symbol: string) =>
+        dispatch(addCrypto(symbol)),
+      );
+    };
+
+    if (Object.keys(cryptoData).length === 0) {
+      fetchData();
     }
-  }, [dispatch, userCryptoList, loading]);
-
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  }, [dispatch, userCryptoList, cryptoData]);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="CryptoList"
-            component={CryptoListScreen}
-            options={{title: 'Crypto Tracker'}}
-          />
-          <Stack.Screen
-            name="AddCrypto"
-            component={AddCryptoScreen}
-            options={{title: 'Add Cryptocurrency'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="CryptoList"
+          component={CryptoListScreen}
+          options={{title: 'Crypto Tracker'}}
+        />
+        <Stack.Screen
+          name="AddCrypto"
+          component={AddCryptoScreen}
+          options={{title: 'Add Cryptocurrency'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

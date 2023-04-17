@@ -15,7 +15,6 @@ const fetchCryptoData = async (currency: string): Promise<CryptoMetrics> => {
 
     if (response.status === 200) {
       const data = response.data.data;
-
       const cryptoMetrics: CryptoMetrics = {
         id: data.id,
         symbol: data.symbol,

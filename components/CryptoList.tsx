@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, FlatList, Text} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import CryptoItem from './CryptoItem';
 import {useSelector} from 'react-redux';
 
@@ -27,7 +27,6 @@ const CryptoList: React.FC = () => {
     .filter((item: any) => item !== null);
 
   if (loading) {
-    Alert.alert('loading');
     return <Text>Loading...</Text>;
   }
 

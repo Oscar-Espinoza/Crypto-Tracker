@@ -67,7 +67,7 @@ const cryptoCurrenciesList = {
 
 const initialState = {
   cryptoCurrenciesList,
-  userCryptoList: ['btc'],
+  userCryptoList: ['btc', 'eth'],
   cryptoData: {},
   loading: false,
 };
@@ -75,9 +75,9 @@ const initialState = {
 const cryptoReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
     case ADD_CRYPTO:
+      console.log(action.payload.data);
       return {
         ...state,
-        userCryptoList: [...state.userCryptoList, action.payload.symbol],
         cryptoData: {
           ...state.cryptoData,
           [action.payload.symbol]: action.payload.data,
