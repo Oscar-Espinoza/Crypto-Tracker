@@ -1,22 +1,30 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import CryptoItem from './CryptoItem';
-import {useDispatch, useSelector} from 'react-redux';
-import {removeCrypto} from '../redux/actions/cryptoActions';
-
-type CryptoListProps = {
-  data: Array<{
-    id: string;
-    name: string;
-    symbol: string;
-    price: number;
-    percentageChange: number;
-  }>;
-  onRemove: (id: string) => void;
-};
+import {useSelector} from 'react-redux';
 
 const CryptoList: React.FC = () => {
-  const cryptos = useSelector((state: CryptoListProps) => state.crypto.cryptos);
+  const cryptoData = useSelector((state: any) => state.crypto.cryptoData);
+  const userCryptoList = useSelector(
+    (state: any) => state.crypto.userCryptoList,
+  );
+  const loading: boolean = useSelector((state: any) => state.crypto.loading);
+
+  // Transform the cryptoData object into an array for the FlatList
+  const cryptos = userCryptoList.map((symbol: string) => {
+    const item = cryptoData[symbol];
+    return {
+      id: item.id,
+      name: item.name,
+      symbol: item.symbol,
+      price: item.priceUsd,
+      percentageChange: item.changePercent24Hr,
+    };
+  });
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <FlatList

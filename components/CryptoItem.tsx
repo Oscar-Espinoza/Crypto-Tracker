@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {removeCrypto} from '../redux/actions/cryptoActions';
 
 type CryptoItemProps = {
@@ -10,7 +10,6 @@ type CryptoItemProps = {
   symbol: string;
   price: number;
   percentageChange: number;
-  onRemove: (id: string) => void;
 };
 
 const CryptoItem: React.FC<CryptoItemProps> = ({
@@ -19,15 +18,18 @@ const CryptoItem: React.FC<CryptoItemProps> = ({
   symbol,
   price,
   percentageChange,
-  onRemove,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleRemove = () => {
+    dispatch(removeCrypto(symbol));
+  };
+
   return (
     <View>
       <Text>{name}</Text>
       <Text>{symbol}</Text>
-      <Text>{price}</Text>
-      <Text>{percentageChange}%</Text>
-      <TouchableOpacity onPress={() => onRemove(id)}>
+      <TouchableOpacity onPress={handleRemove}>
         <MaterialIcons name="delete" size={24} color="black" />
       </TouchableOpacity>
     </View>
