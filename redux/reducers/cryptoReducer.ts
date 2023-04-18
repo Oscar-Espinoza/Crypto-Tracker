@@ -1,5 +1,3 @@
-import {ADD_CRYPTO, REMOVE_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
-
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -68,38 +66,27 @@ const cryptoCurrenciesList = {
 const initialState = {
   cryptoCurrenciesList,
   userCryptoList: ['btc', 'eth'],
-  cryptoData: {},
+  cryptoData: {
+    btc: {
+      id: '1e31218a-e44e-4285-820c-8282ee222035',
+      symbol: 'BTC',
+      name: 'Bitcoin',
+      priceUsd: 29507.173920765475,
+      changePercent24Hr: -2.612249968274451,
+    },
+    eth: {
+      id: '21c795f5-1bfd-40c3-858e-e9d7e820c6d0',
+      symbol: 'ETH',
+      name: 'Ethereum',
+      priceUsd: 2079.0698780898338,
+      changePercent24Hr: 1.9186090358561458,
+    },
+  },
   loading: false,
 };
 
 const cryptoReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
-    case ADD_CRYPTO:
-      return {
-        ...state,
-        cryptoData: {
-          ...state.cryptoData,
-          [action.payload.symbol]: action.payload.data,
-        },
-      };
-    case REMOVE_CRYPTO:
-      return {
-        ...state,
-        userCryptoList: state.userCryptoList.filter(
-          (symbol: string) => symbol !== action.payload,
-        ),
-        cryptoData: Object.keys(state.cryptoData).reduce(
-          (acc: any, key: string) => {
-            if (key !== action.payload) {
-              acc[key] = state.cryptoData[key];
-            }
-            return acc;
-          },
-          {},
-        ),
-      };
-    case SET_LOADING:
-      return {...state, loading: action.payload};
     default:
       return state;
   }

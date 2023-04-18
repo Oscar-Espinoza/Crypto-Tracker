@@ -1,12 +1,16 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
 import CryptoList from '../components/CryptoList';
+import styled from 'styled-components/native';
+
+const SafeAreaContainer = styled.SafeAreaView`
+  flex: 1;
+`;
 
 const ListScreen: React.FC = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaContainer>
       <CryptoList />
-    </SafeAreaView>
+    </SafeAreaContainer>
   );
 };
 

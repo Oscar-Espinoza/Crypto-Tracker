@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList} from 'react-native';
 import CryptoItem from './CryptoItem';
 import {useSelector} from 'react-redux';
 
@@ -8,7 +8,6 @@ const CryptoList: React.FC = () => {
   const userCryptoList = useSelector(
     (state: any) => state.crypto.userCryptoList,
   );
-  const loading: boolean = useSelector((state: any) => state.crypto.loading);
 
   const cryptos = userCryptoList
     .map((symbol: string) => {
@@ -25,11 +24,6 @@ const CryptoList: React.FC = () => {
       return null;
     })
     .filter((item: any) => item !== null);
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
     <FlatList
       data={cryptos}

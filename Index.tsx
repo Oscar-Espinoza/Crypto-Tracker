@@ -5,10 +5,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch} from './redux/store';
-import {addCrypto} from './redux/actions/cryptoActions';
+import React from 'react';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -20,24 +17,6 @@ import AddCryptoScreen from './screens/AddCryptoScreen';
 const Stack = createStackNavigator();
 
 function App(): JSX.Element {
-  const dispatch: AppDispatch = useDispatch();
-  const userCryptoList = useSelector(
-    (state: any) => state.crypto.userCryptoList,
-  );
-  const cryptoData = useSelector((state: any) => state.crypto.cryptoData);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await userCryptoList.forEach((symbol: string) =>
-        dispatch(addCrypto(symbol)),
-      );
-    };
-
-    if (Object.keys(cryptoData).length === 0) {
-      fetchData();
-    }
-  }, [dispatch, userCryptoList, cryptoData]);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
