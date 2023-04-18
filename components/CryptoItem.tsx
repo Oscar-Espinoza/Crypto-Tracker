@@ -21,7 +21,28 @@ const Container = styled.View`
   border-color: #ccc;
 `;
 
-const CryptoInfo = styled.View``;
+const CryptoInfo = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CircleIcon = styled.View`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #fff;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CurrencyIcon = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+`;
 
 const NameAndSymbol = styled.View`
   display: flex;
@@ -29,12 +50,13 @@ const NameAndSymbol = styled.View`
 `;
 
 const Name = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  color: #0e0e0d;
 `;
 
 const Symbol = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const PriceAndPercentage = styled.View`
@@ -44,11 +66,13 @@ const PriceAndPercentage = styled.View`
 `;
 
 const Price = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
+  color: #0e0e0d;
+  font-weight: bold;
 `;
 
 const PercentageChange = styled.Text<{isPositive: boolean}>`
-  font-size: 16px;
+  font-size: 14px;
   color: ${({isPositive}) => (isPositive ? 'green' : 'red')};
   display: flex;
   justify-content: center;
@@ -69,13 +93,20 @@ const CryptoItem: React.FC<CryptoItemProps> = ({
   return (
     <Container>
       <CryptoInfo>
+        <CircleIcon>
+          <CurrencyIcon
+            source={{
+              uri: `https://cryptoicons.org/api/icon/${symbol.toLowerCase()}/200`,
+            }}
+          />
+        </CircleIcon>
         <NameAndSymbol>
           <Name>{name}</Name>
           <Symbol>{symbol}</Symbol>
         </NameAndSymbol>
       </CryptoInfo>
       <PriceAndPercentage>
-        <Price>{price.toFixed(2)}$</Price>
+        <Price>${price.toFixed(2)}</Price>
         <PercentageChange isPositive={isPositive}>
           <MaterialIcons
             name={isPositive ? 'north-east' : 'south-west'}

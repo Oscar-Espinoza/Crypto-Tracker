@@ -20,8 +20,16 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="CryptoList" component={CryptoListScreen} />
-        <Stack.Screen name="AddCrypto" component={AddCryptoScreen} />
+        <Stack.Screen
+          name="CryptoList"
+          component={CryptoListScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddCrypto"
+          component={AddCryptoScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
