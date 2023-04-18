@@ -6,10 +6,20 @@ const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
 `;
 
+const ScrollViewContainer = styled.ScrollView`
+  flex: 1;
+  padding: 20px;
+`;
+
+const EmptyComponent = styled.View``;
+
 const ListScreen: React.FC = () => {
   return (
     <SafeAreaContainer>
-      <CryptoList />
+      <ScrollViewContainer>
+        <CryptoList />
+        <EmptyComponent />
+      </ScrollViewContainer>
     </SafeAreaContainer>
   );
 };
