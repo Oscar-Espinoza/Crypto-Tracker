@@ -80,7 +80,6 @@ const PercentageChange = styled.Text<{isPositive: boolean}>`
 `;
 
 const CryptoItem: React.FC<CryptoItemProps> = ({
-  id,
   name,
   symbol,
   price,

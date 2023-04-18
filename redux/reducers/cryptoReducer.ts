@@ -65,7 +65,7 @@ const cryptoCurrenciesList = {
 
 const initialState = {
   cryptoCurrenciesList,
-  userCryptoList: ['btc', 'eth'],
+  userCryptoList: ['btc', 'eth', 'xrp'],
   cryptoData: {
     btc: {
       id: '1e31218a-e44e-4285-820c-8282ee222035',
@@ -80,6 +80,13 @@ const initialState = {
       name: 'Ethereum',
       priceUsd: 2079.0698780898338,
       changePercent24Hr: 1.9186090358561458,
+    },
+    xrp: {
+      id: '21c795f5-1bfd-40c3-858e-e9d7e8200',
+      symbol: 'XRP',
+      name: 'XRP',
+      priceUsd: 1512.4123413,
+      changePercent24Hr: -1.412312,
     },
   },
   loading: false,
