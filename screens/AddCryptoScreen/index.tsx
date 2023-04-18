@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const AddScreen: React.FC = () => {
+const AddScreen = (): JSX.Element => {
   return (
     <View>
       <Text>Add</Text>

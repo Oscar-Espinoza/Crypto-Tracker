@@ -1,9 +1,9 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import CryptoItem from './CryptoItem';
+import CryptoItem from '../CryptoItem';
 import {useSelector} from 'react-redux';
 
-const CryptoList: React.FC = () => {
+const CryptoList = (): JSX.Element => {
   const cryptoData = useSelector((state: any) => state.crypto.cryptoData);
   const userCryptoList = useSelector(
     (state: any) => state.crypto.userCryptoList,
@@ -24,6 +24,7 @@ const CryptoList: React.FC = () => {
       return null;
     })
     .filter((item: any) => item !== null);
+
   return (
     <FlatList
       data={cryptos}
