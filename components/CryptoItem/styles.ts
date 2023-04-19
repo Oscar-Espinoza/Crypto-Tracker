@@ -5,9 +5,9 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
-  border-bottom-width: 1px;
-  border-color: ${({ theme }) => theme.borderColor};
+  border-bottom-width: 0.5px;
+  border-color: ${({theme}) => theme.borderColor};
+  padding: 20px 0;
 `;
 
 export const CryptoInfo = styled.View`
@@ -20,7 +20,7 @@ export const CircleIcon = styled.View`
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background-color: ${({ theme }) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   margin-right: 10px;
   display: flex;
   justify-content: center;
@@ -41,29 +41,29 @@ export const NameAndSymbol = styled.View`
 export const Name = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: ${({ theme }) => theme.primaryTextColor};
+  color: ${({theme}) => theme.primaryTextColor};
 `;
 
 export const Symbol = styled.Text`
   font-size: 14px;
 `;
 
-export const PriceAndPercentage = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
+export const PriceAndPercentage = styled.View``;
 
 export const Price = styled.Text`
   font-size: 16px;
-  color: ${({ theme }) => theme.primaryTextColor};
+  color: ${({theme}) => theme.primaryTextColor};
   font-weight: bold;
 `;
 
-export const PercentageChange = styled.Text<{isPositive: boolean}>`
-  font-size: 14px;
-  color: ${({isPositive, theme}) => (isPositive ? theme.positiveColor : theme.negativeColor)};
-  display: flex;
-  justify-content: center;
+export const PercentageChange = styled.View`
+  flex-direction: row;
   align-items: center;
+  align-self: flex-end;
+`;
+
+export const Percentage = styled.Text<{isPositive: boolean}>`
+  color: ${({isPositive, theme}) =>
+    isPositive ? theme.positiveColor : theme.negativeColor};
+  font-size: 14px
 `;

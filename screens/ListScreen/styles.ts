@@ -14,7 +14,7 @@ export const TopBarContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   color: ${props => props.theme.text};
 `;
@@ -26,12 +26,12 @@ export const AddCryptoContainer = styled.View`
 
 export const AddCryptoText = styled.Text`
   color: ${props => props.theme.primary};
-  font-weight: bold;
   font-size: 16px;
 `;
 
 export const CryptoListWrapper = styled.View`
   flex-grow: 1;
+  padding: 20px;
 `;
 
 export const CryptoList = styled.FlatList``;

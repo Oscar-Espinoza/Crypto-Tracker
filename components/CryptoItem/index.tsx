@@ -13,6 +13,7 @@ import {
   PriceAndPercentage,
   Price,
   PercentageChange,
+  Percentage,
 } from './styles';
 
 type CryptoItemProps = {
@@ -57,12 +58,15 @@ const CryptoItem = ({
         </CryptoInfo>
         <PriceAndPercentage>
           <Price>${price.toFixed(2)}</Price>
-          <PercentageChange isPositive={isPositive}>
+          <PercentageChange>
             <MaterialIcons
               name={isPositive ? 'north-east' : 'south-west'}
-              size={16}
+              size={14}
+              color={isPositive ? theme.positiveColor : theme.negativeColor}
             />
-            <Text>{Math.abs(percentageChange).toFixed(2)}%</Text>
+            <Percentage isPositive={isPositive}>
+              {Math.abs(percentageChange).toFixed(2)}%
+            </Percentage>
           </PercentageChange>
         </PriceAndPercentage>
       </Container>
