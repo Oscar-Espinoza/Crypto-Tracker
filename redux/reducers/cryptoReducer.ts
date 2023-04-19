@@ -1,3 +1,4 @@
+import {CryptoState, CryptoCurrency} from '../../utils/types/crypto';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -63,7 +64,7 @@ const cryptoCurrenciesList = {
   Tether: 'USDT',
 };
 
-const initialState = {
+const initialState: CryptoState = {
   cryptoCurrenciesList,
   userCryptoList: ['btc', 'eth', 'xrp'],
   cryptoData: {
@@ -71,28 +72,31 @@ const initialState = {
       id: '1e31218a-e44e-4285-820c-8282ee222035',
       symbol: 'BTC',
       name: 'Bitcoin',
-      priceUsd: 29507.173920765475,
-      changePercent24Hr: -2.612249968274451,
+      price_usd: 29507.173920765475,
+      percent_change_usd_last_24_hours: -2.612249968274451,
     },
     eth: {
       id: '21c795f5-1bfd-40c3-858e-e9d7e820c6d0',
       symbol: 'ETH',
       name: 'Ethereum',
-      priceUsd: 2079.0698780898338,
-      changePercent24Hr: 1.9186090358561458,
+      price_usd: 2079.0698780898338,
+      percent_change_usd_last_24_hours: 1.9186090358561458,
     },
     xrp: {
       id: '21c795f5-1bfd-40c3-858e-e9d7e8200',
       symbol: 'XRP',
       name: 'XRP',
-      priceUsd: 1512.4123413,
-      changePercent24Hr: -1.412312,
+      price_usd: 1512.4123413,
+      percent_change_usd_last_24_hours: -1.412312,
     },
   },
   loading: false,
 };
 
-const cryptoReducer = (state: any = initialState, action: any) => {
+const cryptoReducer = (
+  state: CryptoState = initialState,
+  action: {type: string; payload?: CryptoCurrency},
+) => {
   switch (action.type) {
     default:
       return state;

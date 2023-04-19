@@ -49,8 +49,6 @@ export const Symbol = styled.Text`
   font-size: 14px;
 `;
 
-export const PriceAndPercentage = styled.View``;
-
 export const Price = styled.Text`
   font-size: 16px;
   color: ${({theme}) => theme.primaryTextColor};
@@ -66,5 +64,5 @@ export const PercentageChange = styled.View`
 export const Percentage = styled.Text<{isPositive: boolean}>`
   color: ${({isPositive, theme}) =>
     isPositive ? theme.positiveColor : theme.negativeColor};
-  font-size: 14px
+  font-size: 14px;
 `;
