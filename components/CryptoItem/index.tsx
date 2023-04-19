@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {ThemeProvider} from 'styled-components/native';
 import {
@@ -62,7 +61,6 @@ const CryptoItem = ({
             <MaterialIcons
               name={isPositive ? 'north-east' : 'south-west'}
               size={14}
-              color={isPositive ? theme.positiveColor : theme.negativeColor}
             />
             <Percentage isPositive={isPositive}>
               {Math.abs(percentageChange).toFixed(2)}%

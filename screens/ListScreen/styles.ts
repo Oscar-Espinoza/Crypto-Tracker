@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const SafeAreaContainer = styled.SafeAreaView`
   background: ${props => props.theme.background};
+  min-height: 100%;
 `;
 
 export const TopBarContainer = styled.View`
@@ -30,7 +31,6 @@ export const AddCryptoText = styled.Text`
 `;
 
 export const CryptoListWrapper = styled.View`
-  flex-grow: 1;
   padding: 20px;
 `;
 

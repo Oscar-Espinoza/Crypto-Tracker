@@ -8,6 +8,7 @@ export const Container = styled.View`
   border-bottom-width: 0.5px;
   border-color: ${({theme}) => theme.borderColor};
   padding: 20px 0;
+  z-index: 1;
 `;
 
 export const CryptoInfo = styled.View`
