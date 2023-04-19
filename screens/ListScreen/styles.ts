@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 
 export const SafeAreaContainer = styled.SafeAreaView`
-  flex: 1;
-  background: #fff;
+  background: ${props => props.theme.background};
 `;
 
 export const TopBarContainer = styled.View`
@@ -10,14 +9,14 @@ export const TopBarContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #385774;
+  background: ${props => props.theme.primary};
   height: 100px;
 `;
 
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: ${props => props.theme.text};
 `;
 
 export const AddCryptoContainer = styled.View`
@@ -26,7 +25,13 @@ export const AddCryptoContainer = styled.View`
 `;
 
 export const AddCryptoText = styled.Text`
-  color: #385774;
+  color: ${props => props.theme.primary};
   font-weight: bold;
   font-size: 16px;
 `;
+
+export const CryptoListWrapper = styled.View`
+  flex-grow: 1;
+`;
+
+export const CryptoList = styled.FlatList``;

@@ -7,7 +7,7 @@ export const Container = styled.View`
   align-items: center;
   padding: 20px 30px;
   border-bottom-width: 1px;
-  border-color: #ccc;
+  border-color: ${({ theme }) => theme.borderColor};
 `;
 
 export const CryptoInfo = styled.View`
@@ -20,7 +20,7 @@ export const CircleIcon = styled.View`
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.backgroundColor};
   margin-right: 10px;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ export const NameAndSymbol = styled.View`
 export const Name = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: #0e0e0d;
+  color: ${({ theme }) => theme.primaryTextColor};
 `;
 
 export const Symbol = styled.Text`
@@ -56,13 +56,13 @@ export const PriceAndPercentage = styled.View`
 
 export const Price = styled.Text`
   font-size: 16px;
-  color: #0e0e0d;
+  color: ${({ theme }) => theme.primaryTextColor};
   font-weight: bold;
 `;
 
 export const PercentageChange = styled.Text<{isPositive: boolean}>`
   font-size: 14px;
-  color: ${({isPositive}) => (isPositive ? 'green' : 'red')};
+  color: ${({isPositive, theme}) => (isPositive ? theme.positiveColor : theme.negativeColor)};
   display: flex;
   justify-content: center;
   align-items: center;
