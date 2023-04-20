@@ -1,9 +1,10 @@
 import {CryptoCurrency} from '../utils/types/crypto';
 import axios from 'axios';
+import {CRYPTO_API_URL} from '@env';
 
 const fetchCryptoData = async (currency: string): Promise<CryptoCurrency> => {
   try {
-    const API_BASE_URL = `https://data.messari.io/api/v1/assets/${currency}/metrics`;
+    const API_BASE_URL = `${CRYPTO_API_URL}/${currency}/metrics`;
     const response = await axios.get(API_BASE_URL);
 
     if (response.status === 200) {

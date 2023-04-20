@@ -1,4 +1,4 @@
-import {ADD_CRYPTO, REMOVE_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
+import {ADD_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
 import {CryptoState, CryptoAction} from '../../utils/types/crypto';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
@@ -84,22 +84,6 @@ const cryptoReducer = (
           ...state.cryptoData,
           [action.payload.symbol]: action.payload.data,
         },
-      };
-    case REMOVE_CRYPTO:
-      return {
-        ...state,
-        userCryptoList: state.userCryptoList.filter(
-          (symbol: string) => symbol !== action.payload,
-        ),
-        cryptoData: Object.keys(state.cryptoData).reduce(
-          (acc: any, key: string) => {
-            if (key !== action.payload) {
-              acc[key] = state.cryptoData[key];
-            }
-            return acc;
-          },
-          {},
-        ),
       };
     case SET_LOADING:
       return {...state, loading: action.payload};
