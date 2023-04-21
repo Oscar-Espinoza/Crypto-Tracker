@@ -84,6 +84,9 @@ const cryptoReducer = (
           ...state.cryptoData,
           [action.payload.symbol]: action.payload.data,
         },
+        userCryptoList: state.userCryptoList.includes(action.payload.symbol)
+          ? state.userCryptoList
+          : [...state.userCryptoList, action.payload.symbol],
       };
     case SET_LOADING:
       return {...state, loading: action.payload};

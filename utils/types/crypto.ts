@@ -11,6 +11,11 @@ export type CryptoCurrency = {
   percent_change_usd_last_24_hours: number;
 };
 
+export type CryptoListItem = {
+  name: string;
+  symbol: string;
+};
+
 export type CryptoData = {
   [key: string]: CryptoCurrency;
 };
