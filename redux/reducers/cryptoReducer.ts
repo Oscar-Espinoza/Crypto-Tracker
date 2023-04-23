@@ -1,4 +1,8 @@
-import {ADD_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
+import {
+  ADD_CRYPTO,
+  SET_LOADING,
+  REFRESH_CRYPTO,
+} from '../actions/cryptoActions';
 import {CryptoState, CryptoAction} from '../../utils/types/crypto';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
@@ -90,6 +94,14 @@ const cryptoReducer = (
       };
     case SET_LOADING:
       return {...state, loading: action.payload};
+    case REFRESH_CRYPTO:
+      return {
+        ...state,
+        cryptoData: {
+          ...state.cryptoData,
+          [action.payload.symbol]: action.payload.data,
+        },
+      };
     default:
       return state;
   }
