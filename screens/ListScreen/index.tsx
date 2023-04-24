@@ -68,7 +68,6 @@ const ListScreen = (): JSX.Element => {
       <CryptoListWrapper>
         <FlatList
           data={cryptos}
-          style={{maxHeight: '83%'}}
           renderItem={({item}: {item: CryptoCurrency}) => (
             <CryptoItem
               id={item.id}
