@@ -1,8 +1,3 @@
-import {
-  ADD_CRYPTO,
-  REMOVE_CRYPTO,
-  SET_LOADING,
-} from '../../redux/actions/cryptoActions';
 export type CryptoCurrency = {
   id: string;
   symbol: string;
@@ -30,8 +25,3 @@ export type RootStackParamList = {
   CryptoList: undefined;
   AddCrypto: undefined;
 };
-
-export type CryptoAction =
-  | {type: typeof ADD_CRYPTO; payload: {symbol: string; data: CryptoCurrency}}
-  | {type: typeof REMOVE_CRYPTO; payload: string}
-  | {type: typeof SET_LOADING; payload: boolean};
