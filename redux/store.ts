@@ -26,4 +26,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
 
 export default store;
-
