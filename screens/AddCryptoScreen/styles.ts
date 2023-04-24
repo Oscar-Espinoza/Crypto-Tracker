@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const StyledKeyboardAvoidingView = styled.KeyboardAvoidingView`
   flex: 1;
-  background: #fff;
+  background: ${({theme}) => theme.background};
 `;
 
 export const Container = styled.View`
@@ -17,25 +17,28 @@ export const AddCryptoContainer = styled.View`
 `;
 
 export const BackLink = styled.Text`
-  color: #385775;
+  color: ${({theme}) => theme.primary};
   font-size: 16px;
 `;
 
-export const AddCryptoInput = styled.TextInput.attrs({
-  placeholderTextColor: '#b7c0c6',
-})<{isFocused: boolean}>`
-  border: ${({isFocused}) => (isFocused ? '2px #fbd24d' : '1px #c8cfd3')};
+export const AddCryptoInput = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.placeholder,
+}))<{isFocused: boolean}>`
+  border: ${({isFocused, theme}) =>
+    isFocused
+      ? `2px ${theme.inputBorderFocused}`
+      : `1px ${theme.inputBorderUnfocused}`};
   border-radius: 5px;
   padding: 12px;
-  color: black;
-  background: #fafbfc;
+  color: ${({theme}) => theme.primaryTextColor};
+  background: ${({theme}) => theme.background};
   font-size: 16px;
 `;
 
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  color: ${({theme}) => theme.primaryTextColor};
   margin-bottom: 20px;
 `;
 
@@ -46,7 +49,7 @@ export const InputContainer = styled.View`
 `;
 
 export const AddButton = styled.TouchableOpacity`
-  background-color: #fbd24d;
+  background-color: ${({theme}) => theme.addButtonBackground};
   padding: 10px;
   align-items: center;
   width: 50%;
@@ -58,10 +61,10 @@ export const AddButton = styled.TouchableOpacity`
 export const AddButtonText = styled.Text<{isFocused: boolean}>`
   font-size: 18px;
   font-weight: bold;
-  color: #445f73;
+  color: ${({theme}) => theme.addButtonFocusedText};
   opacity: ${({isFocused}) => (isFocused ? '1' : '0.2')};
 `;
 
 export const Warning = styled.Text`
-  color: red;
+  color: ${({theme}) => theme.negativeColor};
 `;

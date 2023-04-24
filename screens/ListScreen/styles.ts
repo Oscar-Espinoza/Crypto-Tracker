@@ -32,4 +32,5 @@ export const AddCryptoText = styled.Text`
 
 export const CryptoListWrapper = styled.View`
   padding: 20px;
+  max-height: 90%;
 `;
