@@ -104,6 +104,9 @@ const ListScreen = (): JSX.Element => {
               />
             )}
             keyExtractor={(item: CryptoCurrency) => item.id}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
           />
         )}
         <TouchableOpacity onPress={() => navigation.navigate('AddCrypto')}>
