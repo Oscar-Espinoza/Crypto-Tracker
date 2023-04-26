@@ -58,11 +58,15 @@ export const AddButton = styled.TouchableOpacity`
   margin-top: 20px;
 `;
 
-export const AddButtonText = styled.Text<{isFocused: boolean}>`
+export const AddButtonText = styled.Text<{
+  isFocused: boolean;
+  isDisabled: boolean;
+}>`
   font-size: 18px;
   font-weight: bold;
   color: ${({theme}) => theme.addButtonFocusedText};
-  opacity: ${({isFocused}) => (isFocused ? '1' : '0.2')};
+  opacity: ${({isFocused, isDisabled}) =>
+    isFocused && !isDisabled ? '1' : '0.2'};
 `;
 
 export const Warning = styled.Text`

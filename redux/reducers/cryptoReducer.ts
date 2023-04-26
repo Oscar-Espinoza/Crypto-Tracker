@@ -71,7 +71,7 @@ const cryptoCurrenciesList = {
 
 const initialState: CryptoState = {
   cryptoCurrenciesList,
-  userCryptoList: ['btc', 'eth', 'xrp'],
+  userCryptoList: [],
   cryptoData: {},
   loading: false,
 };

@@ -50,6 +50,7 @@ const ListScreen = (): JSX.Element => {
 
   const dispatch: AppDispatch = useDispatch();
 
+  //In case the user's list is not empty, we run this useEffect only once to get the info for the user currencies.
   useEffect(() => {
     const fetchData = () => {
       userCryptoList.forEach((symbol: string) => dispatch(addCrypto(symbol)));
@@ -86,25 +87,25 @@ const ListScreen = (): JSX.Element => {
         <MaterialIcons name="account-circle" size={55} />
       </TopBarContainer>
       <CryptoListWrapper>
-        <FlatList
-          data={cryptos}
-          renderItem={({item}: {item: CryptoCurrency}) => (
-            <CryptoItem
-              id={item.id}
-              name={item.name}
-              symbol={item.symbol}
-              price_usd={item.price_usd}
-              percent_change_usd_last_24_hours={
-                item.percent_change_usd_last_24_hours
-              }
-            />
-          )}
-          keyExtractor={(item: CryptoCurrency) => item.id}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        />
-
+        {cryptos.length === 0 ? (
+          <AddCryptoText>You have no currencies in your list</AddCryptoText>
+        ) : (
+          <FlatList
+            data={cryptos}
+            renderItem={({item}: {item: CryptoCurrency}) => (
+              <CryptoItem
+                id={item.id}
+                name={item.name}
+                symbol={item.symbol}
+                price_usd={item.price_usd}
+                percent_change_usd_last_24_hours={
+                  item.percent_change_usd_last_24_hours
+                }
+              />
+            )}
+            keyExtractor={(item: CryptoCurrency) => item.id}
+          />
+        )}
         <TouchableOpacity onPress={() => navigation.navigate('AddCrypto')}>
           <AddCryptoContainer>
             <AddCryptoText>+ Add CryptoCurrency</AddCryptoText>
