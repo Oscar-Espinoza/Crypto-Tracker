@@ -2,6 +2,7 @@ import {
   ADD_CRYPTO,
   SET_LOADING,
   REFRESH_CRYPTO,
+  REMOVE_CRYPTO,
 } from '../actions/cryptoActions';
 import {CryptoState, CryptoAction} from '../../utils/types/crypto';
 const cryptoCurrenciesList = {
@@ -91,6 +92,17 @@ const cryptoReducer = (
         userCryptoList: state.userCryptoList.includes(action.payload.symbol)
           ? state.userCryptoList
           : [...state.userCryptoList, action.payload.symbol],
+      };
+    case REMOVE_CRYPTO:
+      const newUserCryptoList = state.userCryptoList.filter(
+        cryptoSymbol => cryptoSymbol !== action.payload,
+      );
+      const newCryptoData = {...state.cryptoData};
+      delete newCryptoData[action.payload];
+      return {
+        ...state,
+        userCryptoList: newUserCryptoList,
+        cryptoData: newCryptoData,
       };
     case SET_LOADING:
       return {...state, loading: action.payload};
