@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -22,7 +22,8 @@ const AddCryptoScreen = (): JSX.Element => {
   const [search, setSearch] = useState('');
   const [warning, setWarning] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const inputRef = React.useRef<TextInput>(null);
+  const inputRef = useRef<TextInput>(null);
+  const isDisabled = search.trim() === '';
   const {cryptoCurrenciesList, userCryptoList} = useSelector(
     (state: RootState) => state.crypto,
   );
@@ -30,6 +31,7 @@ const AddCryptoScreen = (): JSX.Element => {
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'AddCrypto'>>();
 
+  //compare what is written in the TextInput with the elements in the general list of currencies and user's list of currencies
   const handleAddCrypto = () => {
     const trimmedSearch = search.trim().toLowerCase();
     const selectedCrypto = Object.entries(cryptoCurrenciesList).find(
@@ -74,8 +76,10 @@ const AddCryptoScreen = (): JSX.Element => {
           />
           {warning ? <Warning>{warning}</Warning> : null}
         </InputContainer>
-        <AddButton onPress={() => handleAddCrypto()}>
-          <AddButtonText isFocused={isFocused}>Add</AddButtonText>
+        <AddButton onPress={() => handleAddCrypto()} disabled={isDisabled}>
+          <AddButtonText isFocused={isFocused} isDisabled={isDisabled}>
+            Add
+          </AddButtonText>
         </AddButton>
       </AddCryptoContainer>
     </Container>
