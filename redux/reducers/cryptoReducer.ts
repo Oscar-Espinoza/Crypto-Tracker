@@ -1,4 +1,5 @@
 import {CryptoState, CryptoCurrency} from '../../utils/types/crypto';
+import {ADD_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -66,30 +67,8 @@ const cryptoCurrenciesList = {
 
 const initialState: CryptoState = {
   cryptoCurrenciesList,
-  userCryptoList: ['btc', 'eth', 'xrp'],
-  cryptoData: {
-    btc: {
-      id: '1e31218a-e44e-4285-820c-8282ee222035',
-      symbol: 'BTC',
-      name: 'Bitcoin',
-      price_usd: 29507.173920765475,
-      percent_change_usd_last_24_hours: -2.612249968274451,
-    },
-    eth: {
-      id: '21c795f5-1bfd-40c3-858e-e9d7e820c6d0',
-      symbol: 'ETH',
-      name: 'Ethereum',
-      price_usd: 2079.0698780898338,
-      percent_change_usd_last_24_hours: 1.9186090358561458,
-    },
-    xrp: {
-      id: '21c795f5-1bfd-40c3-858e-e9d7e8200',
-      symbol: 'XRP',
-      name: 'XRP',
-      price_usd: 1512.4123413,
-      percent_change_usd_last_24_hours: -1.412312,
-    },
-  },
+  userCryptoList: [],
+  cryptoData: {},
   loading: false,
 };
 
@@ -98,6 +77,19 @@ const cryptoReducer = (
   action: {type: string; payload?: CryptoCurrency},
 ) => {
   switch (action.type) {
+    case ADD_CRYPTO:
+      return {
+        ...state,
+        cryptoData: {
+          ...state.cryptoData,
+          [action.payload.symbol]: action.payload.data,
+        },
+        userCryptoList: state.userCryptoList.includes(action.payload.symbol)
+          ? state.userCryptoList
+          : [...state.userCryptoList, action.payload.symbol],
+      };
+    case SET_LOADING:
+      return {...state, loading: action.payload};
     default:
       return state;
   }
