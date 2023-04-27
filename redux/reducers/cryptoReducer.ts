@@ -1,4 +1,5 @@
 import {CryptoState, CryptoCurrency} from '../../utils/types/crypto';
+import {ADD_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
