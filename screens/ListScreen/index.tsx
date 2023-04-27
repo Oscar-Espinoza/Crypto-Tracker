@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useSelector} from 'react-redux';
 import CryptoItem from '../../components/CryptoItem';
 import {
   CryptoCurrency,
@@ -17,10 +18,6 @@ import {
   AddCryptoText,
   CryptoListWrapper,
 } from './styles';
-
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch} from '../../redux/store';
-import {addCrypto} from '../../redux/actions/cryptoActions';
 
 const ListScreen = (): JSX.Element => {
   const navigation =
@@ -47,6 +44,7 @@ const ListScreen = (): JSX.Element => {
     })
     .filter(item => !!item) as CryptoCurrency[];
 
+<<<<<<< HEAD
   const dispatch: AppDispatch = useDispatch();
 
   //In case the user's list is not empty, we run this useEffect only once to get the info for the user currencies.
@@ -60,6 +58,8 @@ const ListScreen = (): JSX.Element => {
     }
   }, [dispatch, userCryptoList, cryptoData]);
 
+=======
+>>>>>>> fc14de282f43733dcbf8ceecd23f31e9783e88a5
   return (
     <SafeAreaContainer>
       <TopBarContainer>

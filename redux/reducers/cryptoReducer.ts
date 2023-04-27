@@ -1,5 +1,4 @@
-import {ADD_CRYPTO, SET_LOADING} from '../actions/cryptoActions';
-import {CryptoState, CryptoAction} from '../../utils/types/crypto';
+import {CryptoState, CryptoCurrency} from '../../utils/types/crypto';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -74,7 +73,7 @@ const initialState: CryptoState = {
 
 const cryptoReducer = (
   state: CryptoState = initialState,
-  action: CryptoAction,
+  action: {type: string; payload?: CryptoCurrency},
 ) => {
   switch (action.type) {
     case ADD_CRYPTO:
