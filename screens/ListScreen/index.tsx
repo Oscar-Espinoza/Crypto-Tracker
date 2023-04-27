@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {TouchableOpacity, FlatList, RefreshControl} from 'react-native';
+import {TouchableOpacity, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector, useDispatch} from 'react-redux';
 import CryptoItem from '../../components/CryptoItem';
-import {loadUserCryptoList} from '../../services/cryptoService';
+import {addCrypto} from '../../redux/actions/cryptoActions';
 import {
   CryptoCurrency,
   RootState,
@@ -20,20 +20,13 @@ import {
   CryptoListWrapper,
 } from './styles';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch} from '../../redux/store';
-import {
-  addCrypto,
-  refreshCrypto,
-  setLoading,
-} from '../../redux/actions/cryptoActions';
 const ListScreen = (): JSX.Element => {
-  const [refreshing, setRefreshing] = useState(false);
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, 'CryptoList'>>();
 
-  const {cryptoData, userCryptoList, loading} = useSelector(
-    (state: RootState) => state.crypto,
+  const cryptoData = useSelector((state: RootState) => state.crypto.cryptoData);
+  const userCryptoList = useSelector(
+    (state: RootState) => state.crypto.userCryptoList,
   );
 
   const cryptos: CryptoCurrency[] = userCryptoList
@@ -56,40 +49,14 @@ const ListScreen = (): JSX.Element => {
 
   //In case the user's list is not empty, we run this useEffect only once to get the info for the user currencies.
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch(setLoading(true));
-      const storedUserCryptoList = await loadUserCryptoList();
-      dispatch(setLoading(false));
-      if (storedUserCryptoList.length > 0) {
-        storedUserCryptoList.forEach((symbol: string) =>
-          dispatch(addCrypto(symbol)),
-        );
-      }
+    const fetchData = () => {
+      userCryptoList.forEach((symbol: string) => dispatch(addCrypto(symbol)));
     };
 
     if (Object.keys(cryptoData).length === 0) {
       fetchData();
     }
-  }, []);
-
-  useEffect(() => {
-    const refreshInterval = setInterval(() => {
-      userCryptoList.forEach((symbol: string) =>
-        dispatch(refreshCrypto(symbol)),
-      );
-    }, 10 * 1000);
-
-    return () => {
-      clearInterval(refreshInterval);
-    };
-  }, [dispatch, userCryptoList]);
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    userCryptoList.forEach((symbol: string) =>
-      dispatch(addCrypto(symbol, () => setRefreshing(false))),
-    );
-  };
+  }, [dispatch, userCryptoList, cryptoData]);
 
   return (
     <SafeAreaContainer>
@@ -98,9 +65,7 @@ const ListScreen = (): JSX.Element => {
         <MaterialIcons name="account-circle" size={55} />
       </TopBarContainer>
       <CryptoListWrapper>
-        {loading ? (
-          <AddCryptoText>Loading...</AddCryptoText>
-        ) : cryptos.length === 0 ? (
+        {cryptos.length === 0 ? (
           <AddCryptoText>You have no currencies in your list</AddCryptoText>
         ) : (
           <FlatList
@@ -117,9 +82,6 @@ const ListScreen = (): JSX.Element => {
               />
             )}
             keyExtractor={(item: CryptoCurrency) => item.id}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
           />
         )}
         <TouchableOpacity onPress={() => navigation.navigate('AddCrypto')}>

@@ -40,11 +40,17 @@ const AddCryptoScreen = (): JSX.Element => {
         symbol.toLowerCase() === trimmedSearch,
     );
 
-    if (selectedCrypto && !userCryptoList.includes(selectedCrypto[1])) {
+    if (
+      selectedCrypto &&
+      !userCryptoList.includes(selectedCrypto[1].toLowerCase())
+    ) {
       const [_, symbol] = selectedCrypto;
       dispatch(addCrypto(symbol));
       navigation.navigate('CryptoList');
-    } else if (selectedCrypto && userCryptoList.includes(selectedCrypto[1])) {
+    } else if (
+      selectedCrypto &&
+      userCryptoList.includes(selectedCrypto[1].toLowerCase())
+    ) {
       setWarning('You already have this currency in your list');
     } else {
       setWarning('Please write a correct currency symbol or name');
