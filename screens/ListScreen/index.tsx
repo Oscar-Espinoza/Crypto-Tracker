@@ -3,6 +3,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity, FlatList, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useSelector, useDispatch} from 'react-redux';
 import CryptoItem from '../../components/CryptoItem';
 import {loadUserCryptoList} from '../../services/cryptoService';
 import {
@@ -26,7 +27,6 @@ import {
   refreshCrypto,
   setLoading,
 } from '../../redux/actions/cryptoActions';
-
 const ListScreen = (): JSX.Element => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation =

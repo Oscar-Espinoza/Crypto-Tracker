@@ -6,6 +6,7 @@ import {
 } from '../actions/cryptoActions';
 import {CryptoState, CryptoAction} from '../../utils/types/crypto';
 import {saveUserCryptoList} from '../../services/cryptoService';
+
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -80,7 +81,7 @@ const initialState: CryptoState = {
 
 const cryptoReducer = (
   state: CryptoState = initialState,
-  action: CryptoAction,
+  action: {type: string; payload?: CryptoCurrency},
 ) => {
   switch (action.type) {
     case ADD_CRYPTO:
