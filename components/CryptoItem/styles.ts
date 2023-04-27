@@ -66,9 +66,3 @@ export const Percentage = styled.Text<{isPositive: boolean}>`
     isPositive ? theme.positiveColor : theme.negativeColor};
   font-size: 14px;
 `;
-
-export const IconContainer = styled.View`
-  background-color: ${({theme}) => theme.negativeColor};
-  border-radius: 4px;
-  padding: 4px;
-`;
