@@ -5,6 +5,7 @@ import {
   REMOVE_CRYPTO,
 } from '../actions/cryptoActions';
 import {CryptoState, CryptoAction} from '../../utils/types/crypto';
+import {saveUserCryptoList} from '../../services/cryptoService';
 const cryptoCurrenciesList = {
   Bitcoin: 'BTC',
   Ethereum: 'ETH',
@@ -74,7 +75,7 @@ const initialState: CryptoState = {
   cryptoCurrenciesList,
   userCryptoList: [],
   cryptoData: {},
-  loading: false,
+  loading: true,
 };
 
 const cryptoReducer = (
@@ -83,25 +84,30 @@ const cryptoReducer = (
 ) => {
   switch (action.type) {
     case ADD_CRYPTO:
+      const newUserCryptoListAdd = state.userCryptoList.includes(
+        action.payload.symbol,
+      )
+        ? state.userCryptoList
+        : [...state.userCryptoList, action.payload.symbol];
+      saveUserCryptoList(newUserCryptoListAdd);
       return {
         ...state,
         cryptoData: {
           ...state.cryptoData,
           [action.payload.symbol]: action.payload.data,
         },
-        userCryptoList: state.userCryptoList.includes(action.payload.symbol)
-          ? state.userCryptoList
-          : [...state.userCryptoList, action.payload.symbol],
+        userCryptoList: newUserCryptoListAdd,
       };
     case REMOVE_CRYPTO:
-      const newUserCryptoList = state.userCryptoList.filter(
+      const newUserCryptoListRemove = state.userCryptoList.filter(
         cryptoSymbol => cryptoSymbol !== action.payload,
       );
+      saveUserCryptoList(newUserCryptoListRemove);
       const newCryptoData = {...state.cryptoData};
       delete newCryptoData[action.payload];
       return {
         ...state,
-        userCryptoList: newUserCryptoList,
+        userCryptoList: newUserCryptoListRemove,
         cryptoData: newCryptoData,
       };
     case SET_LOADING:

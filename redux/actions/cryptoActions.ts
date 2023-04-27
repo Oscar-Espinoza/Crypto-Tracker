@@ -45,16 +45,13 @@ export const removeCrypto = (symbol: string) => ({
 export const refreshCrypto = (symbol: string): AppThunk => {
   return async dispatch => {
     try {
-      dispatch(setLoading(true));
       const data = await fetchCryptoData(symbol);
       dispatch({
         type: REFRESH_CRYPTO,
         payload: {symbol, data},
       });
-      dispatch(setLoading(false));
     } catch (error) {
       console.error(error);
-      dispatch(setLoading(false));
     }
   };
 };

@@ -24,7 +24,7 @@ const CryptoItem = ({
   symbol,
   price_usd,
   percent_change_usd_last_24_hours,
-}: CryptoCurrency & {onDelete: (symbol: string) => void}): JSX.Element => {
+}: CryptoCurrency): JSX.Element => {
   const theme = useTheme();
   const isPositive = percent_change_usd_last_24_hours >= 0;
   const dispatch = useDispatch();
