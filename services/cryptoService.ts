@@ -8,7 +8,6 @@ export const fetchCryptoData = async (
 ): Promise<CryptoCurrency> => {
   try {
     const API_BASE_URL = `${CRYPTO_API_URL}/${currency}/metrics`;
-    console.log(API_BASE_URL);
     const response = await axios.get(API_BASE_URL);
 
     if (response.status === 200) {
