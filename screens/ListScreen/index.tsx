@@ -77,7 +77,7 @@ const ListScreen = (): JSX.Element => {
       userCryptoList.forEach((symbol: string) =>
         dispatch(refreshCrypto(symbol)),
       );
-    }, 10 * 1000);
+    }, 600 * 1000);
 
     return () => {
       clearInterval(refreshInterval);
