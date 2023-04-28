@@ -3,7 +3,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity, FlatList, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useSelector, useDispatch} from 'react-redux';
 import CryptoItem from '../../components/CryptoItem';
 import {loadUserCryptoList} from '../../services/cryptoService';
 import {
